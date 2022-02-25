@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 
@@ -6,8 +6,14 @@ void main() {
   runApp(MyApp());
 }
 
-// ignore: use_key_in_widget_constructors
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
   var jokes = [
     {
       "question": "What does a baby computer call it's farther? ",
@@ -28,9 +34,25 @@ class MyApp extends StatelessWidget {
 
   changeJokeIndex(String direction) {
     if (direction == 'next') {
-      jokeIndex++;
+      if (jokeIndex != jokes.length - 1) {
+        setState(() {
+          jokeIndex++;
+        });
+      } else {
+        setState(() {
+          jokeIndex = 0;
+        });
+      }
     } else if (direction == 'prev') {
-      jokeIndex--;
+      if (jokeIndex != 0) {
+        setState(() {
+          jokeIndex--;
+        });
+      } else {
+        setState(() {
+          jokeIndex = jokes.length - 1;
+        });
+      }
     }
   }
 
@@ -66,7 +88,7 @@ class MyApp extends StatelessWidget {
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: FloatingActionButton(
                       onPressed: () {
-                        changeJokeIndex("next");
+                        changeJokeIndex("prev");
                       },
                       child: Icon(
                         Icons.arrow_left_rounded,
@@ -79,7 +101,7 @@ class MyApp extends StatelessWidget {
                     margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: FloatingActionButton(
                       onPressed: () {
-                        changeJokeIndex("prev");
+                        changeJokeIndex("next");
                       },
                       child: Icon(
                         Icons.arrow_right_rounded,
