@@ -24,6 +24,16 @@ class MyApp extends StatelessWidget {
     {"question": "What do call a fish with no eye? ", "answer": "N-fish"}
   ];
 
+  var jokeIndex = 0;
+
+  changeJokeIndex(String direction) {
+    if (direction == 'next') {
+      jokeIndex++;
+    } else if (direction == 'prev') {
+      jokeIndex--;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,7 +45,7 @@ class MyApp extends StatelessWidget {
               Container(
                 margin: EdgeInsets.fromLTRB(15, 5, 15, 45),
                 child: Text(
-                  jokes[0]["question"] as String,
+                  jokes[jokeIndex]["question"] as String,
                   style: TextStyle(fontSize: 27.5, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -43,7 +53,7 @@ class MyApp extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(25),
                 child: Text(
-                  jokes[0]["answer"] as String,
+                  jokes[jokeIndex]["answer"] as String,
                   style:
                       TextStyle(fontSize: 22.5, fontWeight: FontWeight.normal),
                   textAlign: TextAlign.center,
@@ -55,7 +65,9 @@ class MyApp extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: FloatingActionButton(
-                      onPressed: null,
+                      onPressed: () {
+                        changeJokeIndex("next");
+                      },
                       child: Icon(
                         Icons.arrow_left_rounded,
                         size: 60,
@@ -66,7 +78,9 @@ class MyApp extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: FloatingActionButton(
-                      onPressed: null,
+                      onPressed: () {
+                        changeJokeIndex("prev");
+                      },
                       child: Icon(
                         Icons.arrow_right_rounded,
                         size: 60,
