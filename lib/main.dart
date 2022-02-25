@@ -12,12 +12,12 @@ void main() {
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
-  var jokes = [
+class _MyAppState extends State<MyApp> {
+  final _jokes = [
     {
       "question": "What does a baby computer call it's farther? ",
       "answer": "Data"
@@ -33,27 +33,27 @@ class MyAppState extends State<MyApp> {
     {"question": "What do call a fish with no eye? ", "answer": "fsh"}
   ];
 
-  var jokeIndex = 0;
+  var _jokeIndex = 0;
 
-  changeJokeIndex(String direction) {
+  void _changeJokeIndex(String direction) {
     if (direction == 'next') {
-      if (jokeIndex != jokes.length - 1) {
+      if (_jokeIndex != _jokes.length - 1) {
         setState(() {
-          jokeIndex++;
+          _jokeIndex++;
         });
       } else {
         setState(() {
-          jokeIndex = 0;
+          _jokeIndex = 0;
         });
       }
     } else if (direction == 'prev') {
-      if (jokeIndex != 0) {
+      if (_jokeIndex != 0) {
         setState(() {
-          jokeIndex--;
+          _jokeIndex--;
         });
       } else {
         setState(() {
-          jokeIndex = jokes.length - 1;
+          _jokeIndex = _jokes.length - 1;
         });
       }
     }
@@ -67,9 +67,9 @@ class MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Question(question: jokes[jokeIndex]["question"] as String),
-              Answer(answer: jokes[jokeIndex]["answer"] as String),
-              Buttons(changeJokeIndex: changeJokeIndex),
+              Question(question: _jokes[_jokeIndex]["question"] as String),
+              Answer(answer: _jokes[_jokeIndex]["answer"] as String),
+              Buttons(changeJokeIndex: _changeJokeIndex),
             ],
           ),
         ),
