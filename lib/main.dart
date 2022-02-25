@@ -8,6 +8,22 @@ void main() {
 
 // ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
+  var jokes = [
+    {
+      "question": "What does a baby computer call it's farther? ",
+      "answer": "Data"
+    },
+    {
+      "question": "What's a pencil with two erasors called? ",
+      "answer": "pointer"
+    },
+    {
+      "question": "Why is calendar always scared? ",
+      "answer": "Because it's days are numberd"
+    },
+    {"question": "What do call a fish with no eye? ", "answer": "N-fish"}
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +35,7 @@ class MyApp extends StatelessWidget {
               Container(
                 margin: EdgeInsets.fromLTRB(15, 5, 15, 45),
                 child: Text(
-                  "what do you want. a pencil with 2 erasers..?",
+                  jokes[0]["question"] as String,
                   style: TextStyle(fontSize: 27.5, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -27,7 +43,7 @@ class MyApp extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(25),
                 child: Text(
-                  "Pointless",
+                  jokes[0]["answer"] as String,
                   style:
                       TextStyle(fontSize: 22.5, fontWeight: FontWeight.normal),
                   textAlign: TextAlign.center,
